@@ -4,27 +4,37 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyWeb.Controllers
 {
-   public class CategoryController : Controller
-   {
-      private readonly ApplicationDbContext _db;
+    public class CategoryController : Controller
+    {
+        private readonly ApplicationDbContext _db;
       
-      public CategoryController(ApplicationDbContext db)
-      {
+        public CategoryController(ApplicationDbContext db)
+        {
             _db = db;
-      }
+        }
 
-      public IActionResult Index()
-      {
-         // Retrieves all Category records from the Db
-         List<Category> objCategoryList = _db.Categories.ToList();
+        [HttpGet]
+        public IActionResult Index()
+        {
+            // Retrieves all Category records from the Db
+            List<Category> categoryList = _db.Categories.ToList();
          
-         // Pass List of all categories to the Index view
-         return View(objCategoryList);
-      }
+            // Pass List of all categories to the Index view
+            return View(categoryList);
+        }
 
-      public IActionResult Create()
-      {
+        [HttpGet]
+        public IActionResult Create()
+        {
             return View();
-      }
-   }
+        }
+
+        [HttpPost]
+        public IActionResult Create(Category newCategory)
+        {
+            _db.Categories.Add(newCategory);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+    }
 }

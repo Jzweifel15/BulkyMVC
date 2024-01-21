@@ -21,5 +21,10 @@ namespace BulkyWeb.Controllers
          // Pass List of all categories to the Index view
          return View(objCategoryList);
       }
+
+      public IActionResult Create()
+      {
+            return View();
+      }
    }
 }

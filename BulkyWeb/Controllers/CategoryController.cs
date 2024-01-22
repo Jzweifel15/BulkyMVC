@@ -120,8 +120,7 @@ namespace BulkyWeb.Controllers
                 return NotFound();
             }
 
-            // This will not return a view. It will simply delete the found category (if no errors)
-            // and stay on the Index view
+            // Redirect to the Delete view with the form pre-populated with the found Category data
             return View(category);
         }
 
@@ -141,7 +140,7 @@ namespace BulkyWeb.Controllers
             _db.Categories.Remove(category);
             _db.SaveChanges();
 
-            // We did not actually go to a different view, so stay on the Index view after deletion
+            // Redirect back to the Index view
             return RedirectToAction("Index");
         }
     }

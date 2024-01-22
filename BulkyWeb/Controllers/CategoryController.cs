@@ -47,6 +47,9 @@ namespace BulkyWeb.Controllers
                 _db.Categories.Add(newCategory);
                 _db.SaveChanges();
 
+                // Will be used to notify the user that the category was successfully created
+                TempData["success"] = "Category created successfully";
+
                 // Redirect back to the Index view
                 return RedirectToAction("Index");
             }
@@ -94,6 +97,9 @@ namespace BulkyWeb.Controllers
                 _db.Categories.Update(updatedCategory);
                 _db.SaveChanges();
 
+                // Will be used to notify the user that the category was updated successfully
+                TempData["success"] = "Category updated successfully";
+
                 // Redirect back to the Index view
                 return RedirectToAction("Index");
             }
@@ -139,6 +145,9 @@ namespace BulkyWeb.Controllers
             // Actually delete the category
             _db.Categories.Remove(category);
             _db.SaveChanges();
+
+            // Will be used to notify the user that the category was deleted successfully
+            TempData["success"] = "Category deleted successfully";
 
             // Redirect back to the Index view
             return RedirectToAction("Index");

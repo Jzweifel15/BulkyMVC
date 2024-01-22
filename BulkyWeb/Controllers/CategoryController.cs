@@ -73,8 +73,15 @@ namespace BulkyWeb.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit()
+        public IActionResult Edit(Category updatedCategory)
         {
+            if (ModelState.IsValid)
+            {
+                _db.Categories.Update(updatedCategory);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
             return View();
         }
     }
